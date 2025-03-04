@@ -2,6 +2,7 @@
 
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 
 function setSQLiteConnection($user_id, $user_name)
 {
@@ -16,4 +17,24 @@ function setSQLiteConnection($user_id, $user_name)
     
     // Defina a conexão ativa para o usuário
     return $connectionName;
+}
+
+
+
+function connectToSQLite($user_id, $user_name)
+{
+    $databasePath = database_path("$user_id".$user_name."/test2.sqlite");
+
+    if (!file_exists($databasePath)) {
+        abort(404, "Banco de dados não encontrado.");
+    }
+
+    // Purge a conexão SQLite anterior
+    DB::purge('sqlite');
+
+    // Define a nova configuração da conexão SQLite
+    Config::set('database.connections.sqlite.database', $databasePath);
+
+    // Retorna a conexão configurada
+    return DB::connection('sqlite');
 }

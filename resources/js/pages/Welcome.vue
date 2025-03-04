@@ -10,7 +10,7 @@ defineProps({
 
 <template>
 
-<div class="min-h-screen bg-gray-100 p-6">
+<!-- <div class="min-h-screen bg-gray-100 p-6">
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-2xl p-6">
       <h1 class="text-3xl font-bold text-gray-800 mb-4">Dashboard</h1>
       
@@ -25,7 +25,7 @@ defineProps({
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
     <Head title="Welcome">
         <link rel="preconnect" href="https://rsms.me/" />
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
