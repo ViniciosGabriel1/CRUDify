@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserApi;
 use App\Services\ApiService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -22,6 +23,17 @@ class ApiController extends Controller
     }
 
 
+    public function index()
+    {
+        $apis = UserApi::with('user')->get(); 
+        // dd($apis);
+        return Inertia::render('Dashboard', [
+            'apis' => $apis
+        ]);
+    }
+    
+
+
     public function create() {
         // dd(session()->all());
 
@@ -31,7 +43,6 @@ class ApiController extends Controller
     public function store1(Request $request){
 
          $this->apiService->connectToSQLite();
-
          
     }
 
@@ -46,18 +57,9 @@ class ApiController extends Controller
     ]);
 
     // Criar banco de dados e migrations
-    $this->apiService->createSQLiteDatabase($request);
+    return $this->apiService->store_service($request);
 
-    $user = auth()->user();
-    $user_id = $user->id;
-    $user_name = $user->name;
 
-    // Rodar migrations no banco SQLite do usuário
-    $this->apiService->runUserMigrations($user_id, $user_name);
-
-    return response()->json([
-        'message' => 'Banco de dados criado e migration executada!',
-    ]);
 }
 
 }

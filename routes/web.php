@@ -16,6 +16,9 @@ Route::get('api/create', [ApiController::class, 'create'])
 Route::post('api/store', [ApiController::class, 'store'])
     ->name('api.store');
 
+Route::get('dashboard', [ApiController::class, 'index'])
+    ->name('dashboard');
+
 
 
 
@@ -144,9 +147,9 @@ Route::get('/', function () {
     );
 })->name('home');
 
-Route::get('dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 

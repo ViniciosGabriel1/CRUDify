@@ -2,38 +2,51 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
-import PlaceholderPattern from '../components/PlaceholderPattern.vue';
+
+defineProps({
+    apis: Array,
+});
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
     },
+    {
+        title: 'APIs',
+        href: '/api',
+    },
 ];
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Minhas APIs" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
+        <div class="m-12 mb-4 flex items-center justify-between">
+            <h1 class="pr-2 text-2xl font-bold text-gray-700 dark:text-white">Minhas APIs</h1>
+            <a href="/api/create" class="rounded-md bg-indigo-600 px-3 py-2 text-white shadow hover:bg-indigo-700"> Criar Nova API </a>
+        </div>
 
-        <!-- <a href="{{route(:)}}"></a> -->
-        <a href="api/create">CRIAR API</a>
+        <div class="m-3 grid gap-4 md:grid-cols-1">
+            <div
+                v-for="api in apis"
+                :key="api.id"
+                class="relative flex flex-col justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-600"
+            >
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <!-- Nome da API e Data -->
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300">{{ api.api_name }}</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Criado em {{ new Date(api.created_at).toLocaleDateString() }}</p>
+                    </div>
 
-        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
+                    <!-- Botões -->
+                    <div class="flex gap-2">
+                        <a :href="`/api/view/${api.id}`" class="rounded-md bg-blue-500 px-5 py-1 text-white shadow hover:bg-blue-600"> Ver API </a>
+                        <a :href="`/api/delete/${api.id}`" class="rounded-md bg-red-500 px-5 py-1 text-white shadow hover:bg-red-600"> Deletar </a>
+                    </div>
                 </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
-                </div>
-                <div class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <PlaceholderPattern />
-                </div>
-            </div>
-            <div class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border md:min-h-min">
-                <PlaceholderPattern />
             </div>
         </div>
     </AppLayout>
