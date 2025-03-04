@@ -2,9 +2,8 @@
 
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
-use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
+use App\Http\Middleware\VerifyCsrfToken;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,12 +11,22 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function ($middleware) {
+        // Middleware para as rotas web
         $middleware->web(append: [
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+        
+        // Middleware para as rotas API
+     
+        // Excluir rotas específicas da validação CSRF (exemplo para 'api/*')
+        $middleware->validateCsrfTokens(except: [
+            'api/*', // Excluir todas as rotas da API da validação CSRF
+            // Adicione outras rotas específicas, se necessário
+        ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function ($exceptions) {
         //
-    })->create();
+    })
+    ->create();

@@ -25,7 +25,7 @@ const breadcrumbs: BreadcrumbItem[] = [
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="m-12 mb-4 flex items-center justify-between">
             <h1 class="pr-2 text-2xl font-bold text-gray-700 dark:text-white">Minhas APIs</h1>
-            <a href="/api/create" class="rounded-md bg-indigo-600 px-3 py-2 text-white shadow hover:bg-indigo-700"> Criar Nova API </a>
+            <a href="/panel/api/create" class="rounded-md bg-indigo-600 px-3 py-2 text-white shadow hover:bg-indigo-700"> Criar Nova API </a>
         </div>
 
         <div class="m-3 grid gap-4 md:grid-cols-1">
@@ -43,8 +43,8 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                     <!-- Botões -->
                     <div class="flex gap-2">
-                        <a :href="`/api/view/${api.id}`" class="rounded-md bg-blue-500 px-5 py-1 text-white shadow hover:bg-blue-600"> Ver API </a>
-                        <a :href="`/api/delete/${api.id}`" class="rounded-md bg-red-500 px-5 py-1 text-white shadow hover:bg-red-600"> Deletar </a>
+                        <a :href="`/panel/api/show/${api.id}`" class="rounded-md bg-blue-500 px-5 py-1 text-white shadow hover:bg-blue-600"> Ver API </a>
+                        <a :href="`/panel/api/delete/${api.id}`" class="rounded-md bg-red-500 px-5 py-1 text-white shadow hover:bg-red-600"> Deletar </a>
                     </div>
                 </div>
             </div>

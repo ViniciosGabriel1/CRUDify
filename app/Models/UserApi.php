@@ -8,15 +8,22 @@ class UserApi extends Model
 {
     use HasFactory;
 
+    // Defina os campos que podem ser preenchidos (mass assignment)
     protected $fillable = [
-        'id_user',
+        'user_id',
         'api_name',
         'database_path',
         'migrations_path',
     ];
 
-    public function user()
+    // Defina o relacionamento com UserApiColumn
+    public function columns()
     {
+        return $this->hasMany(UserApiColumn::class);
+    }
+
+
+    public function user(){
         return $this->belongsTo(User::class);
     }
 }

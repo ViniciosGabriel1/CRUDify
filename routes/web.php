@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\DynamicApiController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Log as LogModel; // Renomeando para evitar conflito
@@ -8,16 +9,31 @@ use App\Models\Log as LogModel; // Renomeando para evitar conflito
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
+Route::prefix('/api')->group(function () {
+    Route::post('/{apiName}', [DynamicApiController::class, 'store']);  // Criar
+    Route::get('/{apiName}', [DynamicApiController::class, 'index']);   // Ler
+    Route::put('/{apiName}/{id}', [DynamicApiController::class, 'update']); // Atualizar
+    Route::get('/{apiName}/{id}', [DynamicApiController::class, 'show']); // Ver
+    Route::delete('/{apiName}/{id}', [DynamicApiController::class, 'destroy']); // Excluir
+});
 
 
-Route::get('api/create', [ApiController::class, 'create'])
-    ->name('api.create');
+Route::prefix('panel/api')->group(function () {
+    Route::get('/create', [ApiController::class, 'create'])->name('panel.api.create'); // Formulário para criar uma API
+    Route::post('/store', [ApiController::class, 'store'])->name('panel.api.store'); // Salvar nova API no banco
+    Route::get('/list', [ApiController::class, 'index'])->name('panel.api.list'); // Listar APIs criadas
+    Route::get('/edit/{id}', [ApiController::class, 'edit'])->name('panel.api.edit'); // Formulário de edição
+    Route::put('/update/{id}', [ApiController::class, 'update'])->name('panel.api.update'); // Atualizar API
+    Route::delete('/delete/{id}', [ApiController::class, 'destroy'])->name('panel.api.delete'); // Deletar API
+    Route::get('/show/{id}', [ApiController::class, 'show'])->name('panel.api.show'); // Exibir detalhes de uma API
+});
 
-Route::post('api/store', [ApiController::class, 'store'])
-    ->name('api.store');
 
-Route::get('dashboard', [ApiController::class, 'index'])
-    ->name('dashboard');
+Route::get('/dashboard', [ApiController::class, 'index'])->name('dashboard');
+
+
+// Route::get('dashboard', [ApiController::class, 'index'])
+//     ->name('dashboard');
 
 
 
