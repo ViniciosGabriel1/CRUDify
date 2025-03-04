@@ -7,7 +7,7 @@ import { ref } from 'vue';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Create',
-        href: '/api/create',
+        href: 'panel/api/create',
     },
 ];
 
@@ -26,7 +26,7 @@ function removeColumn(index: number) {
 }
 
 function submitForm() {
-    form.post('/api/store', {
+    form.post('/panel/api/store', {
         onSuccess: () => {
             alert('API criada com sucesso!');
         },
