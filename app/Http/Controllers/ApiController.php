@@ -28,7 +28,10 @@ class ApiController extends Controller
 
     public function index()
     {
-        $apis = UserApi::with('user')->get(); 
+        $user = auth()->user();
+        $user_id = $user->id;
+        $apis = UserApi::with('user')
+        ->where('user_id',$user_id)->get(); 
         // dd($apis);
         return Inertia::render('Dashboard', [
             'apis' => $apis

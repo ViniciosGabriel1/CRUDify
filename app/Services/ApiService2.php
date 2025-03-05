@@ -61,7 +61,7 @@ class ApiService2
         $api = UserApi::with('user')->findOrFail($id); 
     
         // Buscar os dados relacionados a essa API
-        $data = UserApiData::where('user_api_id', $api->id)->get();
+        $data = UserApiData::where('user_api_id', $api->id)->paginate(10); // Paginação com 10 itens por página
         $columns = UserApiColumn::where('user_api_id', $api->id)->get();
         // dd($columns);
         return Inertia::render('api/Show', [
