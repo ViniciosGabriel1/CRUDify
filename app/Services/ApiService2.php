@@ -63,7 +63,7 @@ class ApiService2
         // Buscar os dados relacionados a essa API
         $data = UserApiData::where('user_api_id', $api->id)->paginate(10); // Paginação com 10 itens por página
         $columns = UserApiColumn::where('user_api_id', $api->id)->get();
-        // dd($columns);
+        // dd($data);
         return Inertia::render('api/Show', [
             'api' => $api,
             'data' => $data, 

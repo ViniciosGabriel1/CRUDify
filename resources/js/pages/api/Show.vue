@@ -9,6 +9,19 @@ const props = defineProps({
     columns: Array
 });
 
+
+
+const breadcrumbs: BreadcrumbItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
+     {
+        title: 'Show',
+        href: 'panel/api/show',
+    },
+]
+
 const paginatedData = ref(props.data);
 
 const formatDate = (dateString) => {
@@ -28,7 +41,7 @@ const fetchPage = (url) => {
 </script>
 
 <template>
-    <AppLayout :breadcrumbs="[{ label: 'APIs', url: '/panel/api/list' }, { label: api.api_name }]">
+    <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <!-- Botão de edição -->
             <div class="flex justify-end">
