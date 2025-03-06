@@ -5,6 +5,10 @@ import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
+      {
+        title: 'Dashboard',
+        href: '/dashboard',
+    },
     {
         title: 'Create',
         href: 'panel/api/create',
