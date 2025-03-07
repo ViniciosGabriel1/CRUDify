@@ -21,11 +21,10 @@ class ApiService2
     public function store($request)
     {
 
-
         // Criar a API (UserApi)
         $user = auth()->user();
         $user_id = $user->id;
-        $apiName = $request->input('apiName');
+        $apiName = $request->input('api_name');
         $columns = $request->input('columns');
 
         // Criar a entrada na tabela user_apis
@@ -48,12 +47,9 @@ class ApiService2
             ]);
         }
 
-        // Retornar a resposta de sucesso
-        return response()->json([
-            'status' => 'success',
-            'message' => 'API e colunas criadas com sucesso!',
-            'apiName' => $apiName,
-        ]);
+        return redirect()->route('panel.api.create');
+
+      
     }
 
     public function show($id)
@@ -101,7 +97,8 @@ class ApiService2
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->route('panel.api.edit',$id);
+
 
 
     }

@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
 import { defineProps, defineEmits } from 'vue';
+import { ref } from 'vue';
+
+import { useAlert } from "@/composables/useAlert";
+
+const { success,error } = useAlert();
+
 
 // Definição das props
 const props = defineProps({
@@ -33,12 +39,22 @@ function submitForm() {
     const url = props.isEditing ? `/panel/api/update/${props.api.id}` : '/panel/api/store';
     const method = props.isEditing ? 'put' : 'post';
 
+    let message = '';  // Inicializa a variável message
+
+    if (method === 'put') {
+        message = 'API Atualizada';
+    } else {
+        message = 'Nova API Criada';  // Caso o método não seja 'put', outra mensagem pode ser definida
+    }
+
     form[method](url, {
         onSuccess: () => {
-            emit('onSuccess'); // Emite evento para redirecionamento ou feedback
+            
+            // emit('onSuccess');
+              success(message); // Emite evento para redirecionamento ou feedback
         },
         onError: (errors) => {
-            console.error(errors);
+           error('Erro');
         },
     });
 }

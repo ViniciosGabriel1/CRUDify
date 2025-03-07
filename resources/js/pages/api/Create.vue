@@ -1,15 +1,24 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import FormApi from '@/Components/FormApi.vue';
+import { ref } from 'vue';
 
 const breadcrumbs = [
     { title: 'Dashboard', href: '/dashboard' },
     { title: 'Create', href: 'panel/api/create' },
 ];
 
-function handleSuccess() {
-    alert('API criada com sucesso!');
-}
+import { useAlert } from "@/composables/useAlert";
+
+const { success,error } = useAlert();
+
+// const handleSuccess = () => {
+
+//   // Passando a mensagem do input para o `success`
+//   success("Api Criada!");
+// };
+
+
 </script>
 
 <template>
