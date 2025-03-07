@@ -60,10 +60,14 @@ class ApiController extends Controller
     }
 
 
+    public function edit($id){
+        return $this->apiService2->edit($id);
 
+    }
 
-    
-
+    public function update($id, Request $request){
+        return $this->apiService2->update($id,$request);
+    }
 
 //     public function store(Request $request)
 // {

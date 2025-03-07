@@ -38,6 +38,10 @@ const fetchPage = (url) => {
         }
     });
 };
+
+
+
+
 </script>
 
 <template>
@@ -118,6 +122,7 @@ const fetchPage = (url) => {
                         class="px-4 py-2 bg-gray-500 text-white rounded-md disabled:opacity-50">
                         Próxima
                     </button>
+                    
                 </div>
             </div>
         </div>
