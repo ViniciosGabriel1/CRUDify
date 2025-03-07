@@ -21,22 +21,22 @@ class ApiService2
     public function store($request)
     {
 
-        
+
         // Criar a API (UserApi)
         $user = auth()->user();
         $user_id = $user->id;
         $apiName = $request->input('apiName');
         $columns = $request->input('columns');
-    
+
         // Criar a entrada na tabela user_apis
         $userApi = UserApi::create([
             'user_id' => $user_id,
             'api_name' => $apiName,
             'created_at' => now(),
             'updated_at' => now()
-        
+
         ]);
-    
+
         // Criar as colunas para essa API (UserApiColumn)
         foreach ($columns as $column) {
             UserApiColumn::create([
@@ -47,7 +47,7 @@ class ApiService2
                 'updated_at' => now()
             ]);
         }
-    
+
         // Retornar a resposta de sucesso
         return response()->json([
             'status' => 'success',
@@ -58,21 +58,51 @@ class ApiService2
 
     public function show($id)
     {
-        $api = UserApi::with('user')->findOrFail($id); 
-    
+        $api = UserApi::with('user')->findOrFail($id);
+
         // Buscar os dados relacionados a essa API
         $data = UserApiData::where('user_api_id', $api->id)->paginate(10); // Paginação com 10 itens por página
         $columns = UserApiColumn::where('user_api_id', $api->id)->get();
         // dd($data);
         return Inertia::render('api/Show', [
             'api' => $api,
-            'data' => $data, 
+            'data' => $data,
             'columns' => $columns
         ]);
     }
-    
-    
-    
 
-  
+    public function edit($id)
+    {
+        $api = UserApi::with('user')->findOrFail($id);
+
+        // Buscar os dados relacionados a essa API
+        $columns = UserApiColumn::where('user_api_id', $api->id)->get();
+        // dd($data);
+        return Inertia::render('api/Edit', [
+            'api' => $api,
+            'columns' => $columns
+        ]);
+    }
+
+
+    public function update($id,$request){
+        $api = UserApi::with('user')->findOrFail($id);
+
+        $api->update([
+            'api_name' => $request->api_name
+        ]);
+
+        $api->columns()->delete();
+
+        foreach($request->columns as $column){
+            $api->columns()->create([
+                'name' => $column['name'],
+                'type' => $column['type']
+            ]);
+        }
+
+        return redirect()->back();
+
+
+    }
 }

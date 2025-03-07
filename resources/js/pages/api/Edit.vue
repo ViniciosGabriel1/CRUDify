@@ -2,18 +2,23 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import FormApi from '@/Components/FormApi.vue';
 
+const props = defineProps({
+    api: Object,
+    columns: Array
+});
+
 const breadcrumbs = [
     { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Create', href: 'panel/api/create' },
+    { title: 'Editar API', href: `/panel/api/edit/${props.api.id}` },
 ];
 
 function handleSuccess() {
-    alert('API criada com sucesso!');
+    alert('API editada com sucesso!');
 }
 </script>
 
 <template>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <FormApi :isEditing="false" @onSuccess="handleSuccess" />
+        <FormApi :api="api" :columns="columns" :isEditing="true" @onSuccess="handleSuccess" />
     </AppLayout>
 </template>

@@ -38,6 +38,8 @@ const fetchPage = (url) => {
         }
     });
 };
+
+
 </script>
 
 <template>
