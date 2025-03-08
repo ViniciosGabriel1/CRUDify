@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ApiRequest;
 use App\Models\UserApi;
 use App\Services\ApiService;
 use App\Services\ApiService2;
@@ -47,8 +48,10 @@ class ApiController extends Controller
         return Inertia::render('api/Create');
     }
 
-    public function store(Request $request){
+    public function store(ApiRequest $request){
         // dd($request);
+        $validated = $request->validated();
+
         return $this->apiService2->store($request);
          
     }
