@@ -10,7 +10,7 @@ const breadcrumbs = [
 
 import { useAlert } from "@/composables/useAlert";
 
-const { success,error } = useAlert();
+const { success,errors } = useAlert();
 
 // const handleSuccess = () => {
 

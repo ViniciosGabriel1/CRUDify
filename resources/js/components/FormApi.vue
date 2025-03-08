@@ -5,18 +5,19 @@ import { ref } from 'vue';
 
 import { useAlert } from "@/composables/useAlert";
 
-const { success,error } = useAlert();
+const { success,displayErros } = useAlert();
 
 
 // Definição das props
 const props = defineProps({
     api: Object, // Passado para edição
     columns: Array,
-    isEditing: Boolean // Define se é edição ou criação
+    isEditing: Boolean, // Define se é edição ou criação
+    erros: Object
 });
 
 // Evento para feedback
-const emit = defineEmits(['onSuccess']);
+// const emit = defineEmits(['onSuccess']);
 
 // Inicialização do formulário
 const form = useForm({
@@ -47,16 +48,15 @@ function submitForm() {
         message = 'Nova API Criada';  // Caso o método não seja 'put', outra mensagem pode ser definida
     }
 
-    form[method](url, {
-        onSuccess: () => {
-            
-            // emit('onSuccess');
-              success(message); // Emite evento para redirecionamento ou feedback
-        },
-        onError: (errors) => {
-           error('Erro');
-        },
-    });
+  form[method](url, {
+    onSuccess: () => {
+        success(message); // Emite evento para redirecionamento ou feedback
+    },
+    onError: (errors) => {
+        displayErros(errors);
+    },
+});
+
 }
 </script>
 
@@ -106,7 +106,7 @@ function submitForm() {
                             <option value="integer">Integer</option>
                             <option value="text">Text</option>
                             <option value="boolean">Boolean</option>
-                            <option value="timestamp">Timestamp</option>
+                            <option value="date">Date</option>
                         </select>
                     </td>
                     <td class="border border-gray-300 dark:border-gray-600 p-2 text-center">

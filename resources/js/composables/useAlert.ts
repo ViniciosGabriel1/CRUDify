@@ -11,14 +11,26 @@ export function useAlert() {
       });
     },
 
-    error(message: string, title = "Erro!") {
+     displayErros(messages: string | string[] | Record<string, string>, title = "Erro!") {
+      let messageArray: string[];
+  
+      if (typeof messages === "object" && !Array.isArray(messages)) {
+          messageArray = Object.values(messages); // Extraímos os valores do objeto de erros
+      } else {
+          messageArray = Array.isArray(messages) ? messages : [messages]; // Garante que sempre será um array
+      }
+  
+      const mensagemComQuebrasDeLinha = messageArray.join("\n");
+      // console.log(mensagemComQuebrasDeLinha); // Exibe as mensagens com quebras de linha
+
+
       Swal.fire({
-        title,
-        text: message,
-        icon: "error",
-        confirmButtonText: "OK",
+          title, // O título do alerta (por padrão, "Erro!")
+          text:mensagemComQuebrasDeLinha, // Junta as mensagens com quebras de linha
+          icon: "error", // Define o ícone do alerta como "error"
+          confirmButtonText: "OK", // Texto do botão de confirmação
       });
-    },
+  },
 
     confirm(action: () => void, message = "Você tem certeza?", title = "Confirmação") {
       Swal.fire({
