@@ -12,6 +12,7 @@ class UserApi extends Model
     protected $fillable = [
         'user_id',
         'api_name',
+        'api_identifier',
         'database_path',
         'migrations_path',
     ];

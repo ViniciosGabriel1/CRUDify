@@ -26,11 +26,14 @@ class ApiService2
         $user_id = $user->id;
         $apiName = $request->input('api_name');
         $columns = $request->input('columns');
+        $apiIdentifier = $apiName . '-' . Str::uuid();
+    //    dd($apiIdentifier);
 
         // Criar a entrada na tabela user_apis
         $userApi = UserApi::create([
             'user_id' => $user_id,
             'api_name' => $apiName,
+            'api_identifier' => $apiIdentifier,
             'created_at' => now(),
             'updated_at' => now()
 
