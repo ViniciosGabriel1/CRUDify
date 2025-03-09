@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{id}', [ApiController::class, 'update'])->name('panel.api.update');
         Route::delete('/delete/{id}', [ApiController::class, 'destroy'])->name('panel.api.delete');
         Route::get('/show/{id}', [ApiController::class, 'show'])->name('panel.api.show');
+        Route::get('/teste/{id}', [ApiController::class, 'teste'])->name('panel.api.teste');
+        Route::post('/teste_store', [ApiController::class, 'teste_store'])->name('panel.api.teste_store');
     });
 
     Route::get('/dashboard', [ApiController::class, 'index'])->name('dashboard');
