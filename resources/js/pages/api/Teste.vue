@@ -6,15 +6,13 @@ import { defineProps, ref } from 'vue';
 const method = ref('GET'); // Estado para armazenar o método selecionado
 const url = '/panel/api/teste_store'; // URL do backend
 
-
 const props = defineProps({
     api: Object,
     columns: Array,
 });
 const form = useForm({
-    columns: props.columns.map(col => ({ name: col.name, value: '' })), // Inicializa as colunas com valores vazios
+    columns: props.columns.map((col) => ({ name: col.name, value: '' })), // Inicializa as colunas com valores vazios
 });
-
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -33,14 +31,13 @@ const submitForm = () => {
         name: column.name,
         value: column.value, // Valor preenchido pelo usuário
     }));
-    console.log("🚀 ~ columnsData ~ columnsData:", columnsData)
+    console.log('🚀 ~ columnsData ~ columnsData:', columnsData);
 
     // Atualize a propriedade 'columns' do formulário com os valores preenchidos
     form.columns = columnsData;
 
     // Envia os dados para o backend
     form[method.value.toLowerCase()](url, {
-
         onSuccess: () => {
             console.log('Requisição bem-sucedida!');
         },
@@ -109,7 +106,7 @@ const submitForm = () => {
                                 <td class="border border-gray-300 p-2 dark:border-gray-600">{{ column.name }}</td>
                                 <td class="border border-gray-300 p-2 dark:border-gray-600">{{ column.type }}</td>
                                 <input
-                                    class="w-full  border border-gray-300 p-3 shadow-sm focus:ring focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
+                                    class="w-full min-w-0 max-w-full truncate rounded-lg border border-gray-300 p-3 shadow-sm transition duration-200 ease-in-out focus:outline-none focus:ring focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:focus:ring-gray-500"
                                     v-model="form.columns[index].value"
                                     type="text"
                                 />
