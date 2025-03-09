@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
-import FormApi from '@/Components/FormApi.vue';
+import FormApi from '@/components/FormApi.vue';
 import { ref } from 'vue';
 
 
