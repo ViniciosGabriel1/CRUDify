@@ -102,4 +102,29 @@ class ApiService2
 
 
     }
+
+
+    public function destroy($id){
+        // dd($id);
+        // $id = 16;
+        $api = UserApi::with('user')->findOrFail($id);
+        
+        $api->delete();
+
+        return redirect()->route('dashboard');
+
+    }
+
+    public function teste($id){
+
+        $api = UserApi::with('user')->findOrFail($id);
+
+        // Buscar os dados relacionados a essa API
+            $columns = UserApiColumn::where('user_api_id', $api->id)->get();
+        // dd($data);
+        return Inertia::render('api/Teste', [
+            'api' => $api,
+            'columns' => $columns
+        ]);
+    }
 }

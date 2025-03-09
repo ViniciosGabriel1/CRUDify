@@ -21,14 +21,13 @@ export function useAlert() {
       }
   
       const mensagemComQuebrasDeLinha = messageArray.join("\n");
-      // console.log(mensagemComQuebrasDeLinha); // Exibe as mensagens com quebras de linha
 
 
       Swal.fire({
-          title, // O título do alerta (por padrão, "Erro!")
-          text:mensagemComQuebrasDeLinha, // Junta as mensagens com quebras de linha
-          icon: "error", // Define o ícone do alerta como "error"
-          confirmButtonText: "OK", // Texto do botão de confirmação
+          title, 
+          text:mensagemComQuebrasDeLinha, 
+          icon: "error",
+          confirmButtonText: "OK",
       });
   },
 

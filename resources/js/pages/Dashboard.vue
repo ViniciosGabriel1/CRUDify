@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 
 defineProps({
     apis: Array,
@@ -17,6 +17,23 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/api',
     },
 ];
+
+import { useAlert } from "@/composables/useAlert";
+
+const { success,displayErros } = useAlert();
+
+const deleteApi = (id) => {
+    if (confirm("Tem certeza que deseja deletar esta API?")) {
+        router.delete(`/panel/api/delete/${id}`, {
+            onSuccess: () => {
+                success("API deletada com sucesso!");
+            },
+            onError: (errors) => {
+                displayErros(errors)
+            }
+        });
+    }
+};
 </script>
 
 <template>
@@ -43,8 +60,13 @@ const breadcrumbs: BreadcrumbItem[] = [
 
                     <!-- Botões -->
                     <div class="flex gap-2">
-                        <a :href="`/panel/api/show/${api.id}`" class="rounded-md bg-blue-500 px-5 py-1 text-white shadow hover:bg-blue-600"> Ver API </a>
-                        <a :href="`/panel/api/delete/${api.id}`" class="rounded-md bg-red-500 px-5 py-1 text-white shadow hover:bg-red-600"> Deletar </a>
+                        <a :href="`/panel/api/teste/${api.id}`" class="rounded-md bg-green-500 px-5 py-1 text-white shadow hover:bg-green-600">
+                            Testar
+                        </a>
+                        <a :href="`/panel/api/show/${api.id}`" class="rounded-md bg-blue-500 px-5 py-1 text-white shadow hover:bg-blue-600">
+                            Ver API
+                        </a>
+                        <button @click="deleteApi(api.id)" class="rounded-md bg-red-500 px-5 py-1 text-white shadow hover:bg-red-600">Deletar</button>
                     </div>
                 </div>
             </div>

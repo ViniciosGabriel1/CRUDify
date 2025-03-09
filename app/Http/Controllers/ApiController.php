@@ -72,6 +72,25 @@ class ApiController extends Controller
         return $this->apiService2->update($id,$request);
     }
 
+
+    public function destroy($id){
+
+        return $this->apiService2->destroy($id);
+
+    }
+
+
+    public function teste($id){
+        // dd($id);
+        return $this->apiService2->teste($id);
+
+    }
+    public function teste_store(Request $request){
+        dd($request);
+        return $this->apiService2->teste($id);
+
+    }
+
 //     public function store(Request $request)
 // {
 //     $validated = $request->validate([
