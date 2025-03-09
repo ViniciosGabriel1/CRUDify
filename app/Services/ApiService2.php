@@ -121,9 +121,10 @@ class ApiService2
 
     }
 
-    public function teste($id){
+    public function teste($api){
 
-        $api = UserApi::with('user')->findOrFail($id);
+        // dd($api);
+        // $api = UserApi::with('user')->findOrFail($id);
 
         // Buscar os dados relacionados a essa API
             $columns = UserApiColumn::where('user_api_id', $api->id)->get();
