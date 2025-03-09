@@ -36,11 +36,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [ApiController::class, 'create'])->name('panel.api.create'); 
         Route::post('/store', [ApiController::class, 'store'])->name('panel.api.store');
         Route::get('/list', [ApiController::class, 'index'])->name('panel.api.list');
-        Route::get('/edit/{id}', [ApiController::class, 'edit'])->name('panel.api.edit');
-        Route::put('/update/{id}', [ApiController::class, 'update'])->name('panel.api.update');
-        Route::delete('/delete/{id}', [ApiController::class, 'destroy'])->name('panel.api.delete');
-        Route::get('/show/{id}', [ApiController::class, 'show'])->name('panel.api.show');
-        Route::get('/teste/{id}', [ApiController::class, 'teste'])->name('panel.api.teste');
+        Route::get('/edit/{api}', [ApiController::class, 'edit'])->name('panel.api.edit');
+        Route::put('/update/{api}', [ApiController::class, 'update'])->name('panel.api.update');
+        Route::delete('/delete/{api}', [ApiController::class, 'destroy'])->name('panel.api.delete');
+        Route::get('/show/{api}', [ApiController::class, 'show'])->name('panel.api.show');
+        Route::get('/teste/{api}', [ApiController::class, 'teste'])->name('panel.api.teste');
         Route::post('/teste_store', [ApiController::class, 'teste_store'])->name('panel.api.teste_store');
     });
 

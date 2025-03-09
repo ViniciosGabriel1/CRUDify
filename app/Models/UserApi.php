@@ -27,4 +27,12 @@ class UserApi extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function data()
+    {
+        return $this->hasMany(UserApiData::class);
+    }
+
+
+
 }

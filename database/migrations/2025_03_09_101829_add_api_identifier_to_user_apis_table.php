@@ -13,8 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_apis', function (Blueprint $table) {
-            $table->string('api_identifier')->unique()->after('api_name')->default(DB::raw('(UUID())'));
-
+            $table->string('api_identifier', 255)->after('api_name')->unique();
         });
     }
 

@@ -55,24 +55,27 @@ class ApiService2
       
     }
 
-    public function show($id)
+    public function show($api)
     {
-        $api = UserApi::with('user')->findOrFail($id);
+        // dd($api);
+        $api->load(['user', 'columns']);
 
-        // Buscar os dados relacionados a essa API
-        $data = UserApiData::where('user_api_id', $api->id)->paginate(10); // Paginação com 10 itens por página
-        $columns = UserApiColumn::where('user_api_id', $api->id)->get();
-        // dd($data);
+        $data = $api->data()
+            ->orderBy('created_at', 'desc')
+            ->paginate(6); 
+    
+            // dd($data);
         return Inertia::render('api/Show', [
-            'api' => $api,
-            'data' => $data,
-            'columns' => $columns
+            'api' => $api, 
+            'data' => $data, 
         ]);
+
+        
     }
 
-    public function edit($id)
+    public function edit($api)
     {
-        $api = UserApi::with('user')->findOrFail($id);
+        // $api = UserApi::with('user')->findOrFail($id);
 
         // Buscar os dados relacionados a essa API
         $columns = UserApiColumn::where('user_api_id', $api->id)->get();
@@ -84,8 +87,8 @@ class ApiService2
     }
 
 
-    public function update($id,$request){
-        $api = UserApi::with('user')->findOrFail($id);
+    public function update($api,$request){
+        // $api = UserApi::with('user')->findOrFail($api);
 
         $api->update([
             'api_name' => $request->api_name
@@ -100,17 +103,17 @@ class ApiService2
             ]);
         }
 
-        return redirect()->route('panel.api.edit',$id);
+        return redirect()->route('panel.api.edit',$api->id);
 
 
 
     }
 
 
-    public function destroy($id){
+    public function destroy($api){
         // dd($id);
         // $id = 16;
-        $api = UserApi::with('user')->findOrFail($id);
+        // $api = UserApi::with('user')->findOrFail($id);
         
         $api->delete();
 
