@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->string('api_name');
-            $table->string('database_path');
-            $table->string('migrations_path');
             $table->enum('status_api',['ativo','inativo'])->default('inativo');
             $table->timestamps();
         });
