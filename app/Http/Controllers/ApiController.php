@@ -57,37 +57,37 @@ class ApiController extends Controller
     }
 
 
-    public function show($id){
-        
-        return $this->apiService2->show($id);
+    public function show(UserApi $api){
+        // dd($api);
+        return $this->apiService2->show($api);
     }
 
 
-    public function edit($id){
-        return $this->apiService2->edit($id);
+    public function edit(UserApi $api){
+        return $this->apiService2->edit($api);
 
     }
 
-    public function update($id, Request $request){
-        return $this->apiService2->update($id,$request);
+    public function update(Request $request, UserApi $api){
+        return $this->apiService2->update($api,$request);
     }
 
 
-    public function destroy($id){
+    public function destroy(UserApi $api){
 
-        return $this->apiService2->destroy($id);
+        return $this->apiService2->destroy($api);
 
     }
 
 
-    public function teste($id){
-        // dd($id);
-        return $this->apiService2->teste($id);
+    public function teste(UserApi $api){
+        // dd(UserApi $api);
+        return $this->apiService2->teste($api);
 
     }
     public function teste_store(Request $request){
         dd($request);
-        return $this->apiService2->teste($id);
+        return $this->apiService2->teste($api);
 
     }
 

@@ -36,7 +36,7 @@ const deleteApi = (id) => {
 };
 </script>
 
-<template>
+<template>  
     <Head title="Minhas APIs" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
